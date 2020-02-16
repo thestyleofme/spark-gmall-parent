@@ -1,0 +1,12 @@
+log4j.appender.gmall.MyConsole=org.apache.log4j.ConsoleAppender
+log4j.appender.gmall.MyConsole.target=System.out
+log4j.appender.gmall.MyConsole.layout=org.apache.log4j.PatternLayout
+log4j.appender.gmall.MyConsole.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p (%c:%M) - %m%n
+
+log4j.appender.gmall.File=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.gmall.File.file=applog/gmall/log/app.log
+log4j.appender.gmall.File.DatePattern='.'yyyy-MM-dd
+log4j.appender.gmall.File.layout=org.apache.log4j.PatternLayout
+log4j.appender.gmall.File.layout.ConversionPattern=%m%n
+
+log4j.logger.org.abigballofmud.gmall.logger.controller.LogController=info,gmall.MyConsole,gmall.File

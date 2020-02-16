@@ -1,0 +1,5 @@
+server:
+  port: 38080
+spring:
+  kafka:
+    bootstrap-servers: hdsp001:6667,hdsp002:6667,hdsp003:6667
