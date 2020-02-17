@@ -38,7 +38,7 @@ public class LogServiceImpl implements LogService {
         try {
             // 对log加时间戳
             Map map = objectMapper.readValue(logString, Map.class);
-            map.put("ts", System.nanoTime());
+            map.put("ts", System.currentTimeMillis());
             // 写日志 用于离线采集
             String logJson = objectMapper.writeValueAsString(map);
             log.info(logJson);

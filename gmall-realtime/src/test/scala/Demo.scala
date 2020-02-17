@@ -1,5 +1,4 @@
-import java.time.{LocalDateTime, ZoneId, ZoneOffset}
-import java.util.Date
+import java.time.{LocalDateTime, ZoneId}
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.types.{DataTypes, StructField, StructType}
@@ -13,7 +12,7 @@ import org.apache.spark.sql.{DataFrame, Row, SparkSession}
  * @author isacc 2020/02/16 15:13
  * @since 1.0
  */
-object Test {
+object Demo {
 
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder().appName("test").master("local[2]").getOrCreate()

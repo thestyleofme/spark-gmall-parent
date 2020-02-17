@@ -26,9 +26,9 @@ public class LogUploader {
         HttpEntity<String> requestEntity = new HttpEntity<>(logContent,
                 RestTemplateUtil.applicationJsonHeaders());
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(
-                // "http://127.0.0.1:38080/log", requestEntity, String.class);
+                "http://127.0.0.1:38080/log", requestEntity, String.class);
                 // 这里nginx做了反向代理 监听本机8000端口
-                "http://127.0.1.0:8000/log", requestEntity, String.class);
+                // "http://127.0.1.0:8000/log", requestEntity, String.class);
         log.debug("upload log, status: {}, response: {}", responseEntity.getStatusCode(), requestEntity.getBody());
     }
 }

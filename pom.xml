@@ -11,6 +11,7 @@
         <module>gmall-common</module>
         <module>gmall-mock</module>
         <module>gmall-logger</module>
+        <module>gmall-realtime</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -41,7 +42,7 @@
     <dependencyManagement>
         <dependencies>
             <!--log-->
-           <!-- <dependency>
+            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
@@ -50,8 +51,9 @@
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
-            </dependency>-->
+            </dependency>
 
+            <!--fix spark 2.3.2 bug janino从默认的3.0.10回退到3.0.8-->
             <dependency>
                 <groupId>org.codehaus.janino</groupId>
                 <artifactId>janino</artifactId>
