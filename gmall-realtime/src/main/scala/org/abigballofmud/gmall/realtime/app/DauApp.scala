@@ -1,6 +1,5 @@
 package org.abigballofmud.gmall.realtime.app
 
-import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.time.{Instant, LocalDateTime, ZoneId}
 import java.util.Properties
@@ -10,6 +9,7 @@ import com.typesafe.scalalogging.Logger
 import org.abigballofmud.gmall.common.constants.GmallConstants
 import org.abigballofmud.gmall.realtime.model.StartupLog
 import org.abigballofmud.gmall.realtime.utils.{KafkaUtil, PropertiesUtil, RedisUtil}
+import org.apache.hadoop.conf.Configuration
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.rdd.RDD
@@ -20,6 +20,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.slf4j.LoggerFactory
 import redis.clients.jedis.{Jedis, Pipeline}
+import org.apache.phoenix.spark._
 
 /**
  * <p>
@@ -135,11 +136,17 @@ object DauApp {
         // executor
         for (startupLog <- startupLogItr) {
           val dauKey: String = "dau:" + startupLog.logDate
-          log.info("redis add {}:::{}", dauKey, startupLog.mid)
+          log.debug("redis add {}:::{}", dauKey, startupLog.mid)
           jedis.sadd(dauKey, startupLog.mid)
         }
         jedis.close()
       }
+    }
+
+    // 存储到phoenix
+    realFilteredDStream.foreachRDD { rdd =>
+      rdd.saveToPhoenix("GMALL_DAU", Seq("MID", "UID", "APPID", "AREA", "OS", "CH", "TYPE", "VS", "LOGDATE", "LOGHOUR", "TS"),
+        new Configuration, Some("hdsp003:2182"))
     }
 
     // 更新消费的offset
@@ -186,7 +193,7 @@ object DauApp {
     val spark: SparkSession = SparkSession
       .builder()
       .config(conf)
-      .enableHiveSupport()
+//      .enableHiveSupport()
       .getOrCreate()
     spark
   }

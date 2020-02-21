@@ -56,13 +56,19 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
         </dependency>
+        <!-- phoenix-->
+        <dependency>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-spark</artifactId>
+            <!--            <scope>provided</scope>-->
+        </dependency>
         <!--jdbc-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <!--            <scope>provided</scope>-->
         </dependency>
-    </dependencies>
 
+    </dependencies>
 
 </project>

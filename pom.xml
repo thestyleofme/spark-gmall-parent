@@ -12,6 +12,7 @@
         <module>gmall-mock</module>
         <module>gmall-logger</module>
         <module>gmall-realtime</module>
+        <module>gmall-canal</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -30,9 +31,12 @@
         <!-- <spark.version>2.4.4</spark.version>-->
         <spark.version>2.3.2</spark.version>
         <scala.version>2.11.12</scala.version>
+        <phoenix.version>5.0.0.3.1.0.0-78</phoenix.version>
+<!--        <phoenix.version>5.0.0-HBase-2.0</phoenix.version>-->
         <scala.logging.version>3.9.2</scala.logging.version>
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
+        <canal.version>1.1.4</canal.version>
     </properties>
 
     <dependencies>
@@ -117,6 +121,13 @@
                 <version>${spark.version}</version>
             </dependency>
 
+            <!-- phoenix-->
+            <dependency>
+                <groupId>org.apache.phoenix</groupId>
+                <artifactId>phoenix-spark</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+
             <!--jdbc-->
             <dependency>
                 <groupId>mysql</groupId>
@@ -129,9 +140,40 @@
                 <artifactId>lombok</artifactId>
                 <version>1.18.12</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.client</artifactId>
+                <version>${canal.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>3.0.1-b06</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>hortonworks</id>
+            <name>hortonworks</name>
+            <url>https://repo.hortonworks.com/content/repositories/releases/</url>
+        </repository>
+    </repositories>
 
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>

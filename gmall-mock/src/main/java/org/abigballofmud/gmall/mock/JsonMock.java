@@ -99,8 +99,8 @@ public class JsonMock {
         ts       bigint     启动时间
         area     string     城市
          */
-        String mid = "mid_" + RandomNumber.getRandomInt(1, 500);
-        String uid = "uid_" + RandomNumber.getRandomInt(1, 500);
+        String mid = "mid_" + RandomNumber.getRandomInt(1, 1000);
+        String uid = "uid_" + RandomNumber.getRandomInt(1, 1000);
         String os = osOptionGroup.getRandomOpt().getValue();
         String area = areaOptionGroup.getRandomOpt().getValue();
         String vs = vsOptionGroup.getRandomOpt().getValue();
