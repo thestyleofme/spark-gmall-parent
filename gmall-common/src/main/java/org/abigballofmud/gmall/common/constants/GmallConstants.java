@@ -15,4 +15,6 @@ public interface GmallConstants {
     String KAFKA_TOPIC_STARTUP = "test_gmall_start";
     String KAFKA_MESSAGE_TYPE_EVENT = "event";
     String KAFKA_TOPIC_EVENT = "test_gmall_event";
+
+    String PHOENIX_TABLE = "gmall_dau";
 }

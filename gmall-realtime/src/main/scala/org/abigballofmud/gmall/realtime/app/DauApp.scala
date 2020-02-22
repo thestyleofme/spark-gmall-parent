@@ -71,7 +71,7 @@ object DauApp {
     val spark: SparkSession = getOrCreateSparkSession(conf)
     val sc: SparkContext = spark.sparkContext
     // 创建StreamingContext
-    val ssc = new StreamingContext(sc, Seconds(30))
+    val ssc = new StreamingContext(sc, Seconds(5))
     // 创建kafka流
     val kafkaStream: InputDStream[ConsumerRecord[String, String]] =
       KafkaUtil.createKafkaStream(ssc, GmallConstants.KAFKA_TOPIC_STARTUP, 1)
@@ -145,7 +145,7 @@ object DauApp {
 
     // 存储到phoenix
     realFilteredDStream.foreachRDD { rdd =>
-      rdd.saveToPhoenix("GMALL_DAU", Seq("MID", "UID", "APPID", "AREA", "OS", "CH", "TYPE", "VS", "LOGDATE", "LOGHOUR", "TS"),
+      rdd.saveToPhoenix(GmallConstants.PHOENIX_TABLE, Seq("MID", "UID", "APPID", "AREA", "OS", "CH", "TYPE", "VS", "LOGDATE", "LOGHOUR", "TS"),
         new Configuration, Some("hdsp003:2182"))
     }
 
@@ -193,7 +193,7 @@ object DauApp {
     val spark: SparkSession = SparkSession
       .builder()
       .config(conf)
-//      .enableHiveSupport()
+      //      .enableHiveSupport()
       .getOrCreate()
     spark
   }
