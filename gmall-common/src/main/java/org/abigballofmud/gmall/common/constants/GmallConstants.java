@@ -17,4 +17,6 @@ public interface GmallConstants {
     String KAFKA_TOPIC_EVENT = "test_gmall_event";
 
     String PHOENIX_TABLE = "gmall_dau";
+
+    String DAU_TYPE = "dau";
 }

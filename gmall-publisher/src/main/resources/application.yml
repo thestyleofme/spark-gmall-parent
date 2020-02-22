@@ -1,0 +1,23 @@
+server:
+  port: 39090
+spring:
+  datasource:
+    driver-class-name: org.apache.phoenix.queryserver.client.Driver
+    url: jdbc:phoenix:thin:url=http://192.168.12.247:8765;serialization=PROTOBUF
+    username:
+    password:
+    hikari:
+      # 必须设置 不然hikari isValid()报错
+      connection-test-query: select 1
+
+mybatis:
+  mapperLocations: classpath*:/mapper/*.xml
+
+logging:
+  level:
+    org.abigballofmud.gmall.publisher: ${LOGGING_LEVEL:debug}
+
+
+
+
+

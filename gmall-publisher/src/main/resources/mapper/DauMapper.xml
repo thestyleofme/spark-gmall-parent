@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.abigballofmud.gmall.publisher.mapper.DauMapper">
+
+    <resultMap id="DauHourCountMap" type="java.util.Map" autoMapping="true">
+        <!--        <result column="LOGHOUR" property="logHour" jdbcType="VARCHAR"/>-->
+        <!--        <result column="CNT" property="cnt" jdbcType="DECIMAL"/>-->
+    </resultMap>
+
+    <select id="getDauTotal" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM gmall_dau
+        WHERE LOGDATE = #{date,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getDauHourCount" resultMap="DauHourCountMap">
+        SELECT LOGHOUR,
+               COUNT(*) CNT
+        FROM gmall_dau
+        WHERE LOGDATE = #{date,jdbcType=VARCHAR}
+        GROUP BY LOGHOUR
+    </select>
+
+
+</mapper>
