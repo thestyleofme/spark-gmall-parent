@@ -10,6 +10,8 @@
 >
 > jdbc:phoenix:thin:url=http://192.168.12.247:8765;serialization=PROTOBUF
 
+> Phoenix语法
+> https://phoenix.apache.org/language/index.html#upsert_values
 ```
 CREATE TABLE gmall_dau( mid VARCHAR,
 uid VARCHAR,
